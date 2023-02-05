@@ -6,98 +6,70 @@ class Api {
     this._headers = option.headers
   }
 
-  rememberId(id){
+  rememberId(id) {
     this.id = id
+  }
+
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject('Произошла ошибка');
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, { headers: this._headers })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Произошла ошибка')
-      })
+      .then(this._checkResponse)
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, { headers: this._headers })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Произошла ошибка')
-      });
+      .then(this._checkResponse)
   }
 
-  editProfile(data){
+  editProfile(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify(data)
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Произошла ошибка')
-      });
+      .then(this._checkResponse)
   }
 
-  addNewCard(data){
+  addNewCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify(data)
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Произошла ошибка')
-      });
+      .then(this._checkResponse)
   }
 
-  deleteCard(){
+  deleteCard() {
     return fetch(`${this._baseUrl}/cards/${this.id}`, {
       method: "DELETE",
       headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Произошла ошибка')
-      });
+      .then(this._checkResponse)
   }
 
-  addLike(id){
+  addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Произошла ошибка')
-      });
+      .then(this._checkResponse)
   }
 
-  removeLike(id){
+  removeLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
       headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Произошла ошибка')
-      });
+      .then(this._checkResponse)
   }
 
-  changeAvatar(data){
+  changeAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
@@ -105,12 +77,7 @@ class Api {
         avatar: `${data}`
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Произошла ошибка')
-      });
+      .then(this._checkResponse)
   }
 
 }

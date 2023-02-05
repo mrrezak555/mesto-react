@@ -4,9 +4,9 @@ import { api } from '../utils/Api'
 import Card from './Card';
 
 function Main(props) {
-    const [userName, setUserName] = React.useState([]);
-    const [userDescription, setUserDescription] = React.useState([]);
-    const [userAvatar, setUserAvatar] = React.useState([]);
+    const [userName, setUserName] = React.useState('');
+    const [userDescription, setUserDescription] = React.useState('');
+    const [userAvatar, setUserAvatar] = React.useState('');
     const [cards, setCards] = React.useState([]);
 
     React.useEffect(() => {
@@ -47,17 +47,19 @@ function Main(props) {
             </section>
             <section className="grid">
                 {
-                    cards.map((item) =>{
+                    cards.map((item) => {
                         //console.log(item.likes.length)
                         //console.log(item)
-                        return <Card
-                        link={item.link}
-                        key={item._id}
-                        name={item.name}
-                        likesCount={item.likes.length}
-                        onCardClick={props.onCardClick}
-                        item={item}
-                        />;
+                        return (
+                            <Card
+                                link={item.link}
+                                key={item._id}
+                                name={item.name}
+                                likesCount={item.likes.length}
+                                onCardClick={props.onCardClick}
+                                item={item}
+                            />
+                        );
                     })
 
                 }

@@ -8,7 +8,7 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
 function App() {
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
@@ -18,7 +18,7 @@ function App() {
   }
 
   function handleEditProfileClick() {
-    setEditProfilePopupOpen(true);
+    setIsEditProfilePopupOpen(true);
   }
 
   function handleAddPlaceClick() {
@@ -27,7 +27,7 @@ function App() {
 
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
-    setEditProfilePopupOpen(false);
+    setIsEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setSelectedCard(null);
   }
@@ -44,7 +44,7 @@ function App() {
         handleEditAvatarClick={handleEditAvatarClick}
         handleEditProfileClick={handleEditProfileClick}
         handleAddPlaceClick={handleAddPlaceClick}
-        onCardClick ={handleCardClick}
+        onCardClick={handleCardClick}
       />
       <Footer />
       <PopupWithForm
@@ -53,14 +53,16 @@ function App() {
         title={'Редактировать профиль'}
         textButton={'Сохранить'}
         children={
-          <><section className="popup__section">
-            <input type="text" className="popup__input" id="name" name="name" placeholder="Имя" required minLength="2" maxLength="40" />
-            <span className="popup__input-error"></span>
-          </section>
+          <>
+            <section className="popup__section">
+              <input type="text" className="popup__input" id="name" name="name" placeholder="Имя" required minLength="2" maxLength="40" />
+              <span className="popup__input-error"></span>
+            </section>
             <section className="popup__section">
               <input type="text" className="popup__input" id="job" name="job" placeholder="О себе" required minLength="2" maxLength="200" />
               <span className="popup__input-error"></span>
-            </section></>
+            </section>
+          </>
         }
         onClose={closeAllPopups}
       />
@@ -70,10 +72,12 @@ function App() {
         title={'Обновить аватар'}
         textButton={'Сохранить'}
         children={
-          <><section className="popup__section popup__section_putch-avatar">
-            <input type="url" className="popup__input" id="avatar" name="avatar" placeholder="Ссылка на аватар" required />
-            <span className="popup__input-error"></span>
-          </section></>
+          <>
+            <section className="popup__section popup__section_putch-avatar">
+              <input type="url" className="popup__input" id="avatar" name="avatar" placeholder="Ссылка на аватар" required />
+              <span className="popup__input-error"></span>
+            </section>
+          </>
         }
         onClose={closeAllPopups}
       />
@@ -100,20 +104,6 @@ function App() {
         card={selectedCard}
         onClose={closeAllPopups}
       />
-      <div className="popup popup_photo" id="photoPopup">
-        <div className="popup__container popup__container_photo">
-          <button className="popup__close" type="button"></button>
-          <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" alt="пример" className="popup__image" />
-          <p className="popup__subtitle"></p>
-        </div>
-      </div>
-      <div className="popup" id="deletePopup">
-        <div className="popup__container">
-          <button className="popup__close" type="button"></button>
-          <h2 className="popup__title">Вы уверены?</h2>
-          <button type="submit" className="popup__submit popup__submit_delete">Да</button>
-        </div>
-      </div>
     </>
   );
 }
