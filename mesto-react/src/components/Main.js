@@ -27,7 +27,6 @@ function Main(props) {
                     cards.map((item) => {
                         //console.log(item.likes.length)
                         //console.log(item.likes.some(i => i._id === currentUser._id))
-                        const isLikedItem = item.likes.some(i => i._id === currentUser._id);
                         //console.log(isLikedItem)
                         return (
                             <Card
@@ -39,8 +38,6 @@ function Main(props) {
                                 onCardLike={props.onCardLike}
                                 onCardDelete={props.onCardDelete}
                                 item={item}
-                                isOwn={item.owner._id === currentUser._id}
-                                isLiked={isLikedItem}
                             />
                         );
                     })

@@ -78,13 +78,21 @@ function App() {
       api.addLike(card._id)
         .then((newCard) => {
           setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        })
+        .catch((err) => {
+          console.log(`Ошибка. Запрос не выполнен ${err}`);
         });
     }
     else {
       api.removeLike(card._id)
         .then((newCard) => {
           setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-        });
+        }).catch((err) => {
+        console.log(`Ошибка. Запрос не выполнен ${err}`);
+      })
+      .catch((err) => {
+        console.log(`Ошибка. Запрос не выполнен ${err}`);
+      });
     }
   }
 
@@ -92,6 +100,9 @@ function App() {
     api.deleteCard(card._id)
       .then((data) => {
         setCards((state) => state.filter((c) => c._id !== card._id))
+      })
+      .catch((err) => {
+        console.log(`Ошибка. Запрос не выполнен ${err}`);
       })
   }
 
@@ -101,6 +112,9 @@ function App() {
         setCurrentUser(data)
         closeAllPopups()
       })
+      .catch((err) => {
+        console.log(`Ошибка. Запрос не выполнен ${err}`);
+      })
   }
 
   function handleUpdateAvatar(link) {
@@ -109,6 +123,9 @@ function App() {
         setCurrentUser(data)
         closeAllPopups()
       })
+      .catch((err) => {
+        console.log(`Ошибка. Запрос не выполнен ${err}`);
+      })
   }
 
   function hadleAddPlace(data) {
@@ -116,6 +133,9 @@ function App() {
       .then((data) => {
         setCards([data, ...cards]);
         closeAllPopups()
+      })
+      .catch((err) => {
+        console.log(`Ошибка. Запрос не выполнен ${err}`);
       })
   }
 
