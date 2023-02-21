@@ -6,9 +6,6 @@ class Api {
     this._headers = option.headers
   }
 
-  rememberId(id) {
-    this.id = id
-  }
 
   _checkResponse(res) {
     if (res.ok) {
@@ -45,8 +42,8 @@ class Api {
       .then(this._checkResponse)
   }
 
-  deleteCard() {
-    return fetch(`${this._baseUrl}/cards/${this.id}`, {
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
     })
